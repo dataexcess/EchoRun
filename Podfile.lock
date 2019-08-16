@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (4.8.2)
+  - CrossroadRegex (1.1.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - CrossroadRegex
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - CrossroadRegex
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 112e091d54a990138a333e6f23c5721e8e9b2995
+PODFILE CHECKSUM: 297f9edc4c6c74131130e2307190053f478d0520
 
 COCOAPODS: 1.5.3

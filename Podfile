@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'innate' do
 
@@ -7,5 +7,6 @@ target 'innate' do
   # Pods for innate
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'CrossroadRegex'
 
 end

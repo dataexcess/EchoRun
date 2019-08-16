@@ -12,9 +12,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        CameraManager.sharedInstance.delegate = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        CameraManager.sharedInstance.openCamera(fromViewController: self)
+    }
+}
 
-
+extension ViewController : CameraManagerDelegate {
+    
+    func didFailInFetchingCameraImage() {
+        print("FAIL")
+    }
+    
+    func didSucceedInFetchingCameraImage(img: UIImage) {
+        print("SUCCEED")
+        NetworkManager.sharedInstance.uploadImage(img)
+    }
 }
 

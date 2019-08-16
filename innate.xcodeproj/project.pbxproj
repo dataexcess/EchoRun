@@ -13,6 +13,8 @@
 		DA462BB32306C149005212BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA462BB12306C149005212BE /* Main.storyboard */; };
 		DA462BB52306C14A005212BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA462BB42306C14A005212BE /* Assets.xcassets */; };
 		DA462BB82306C14A005212BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA462BB62306C14A005212BE /* LaunchScreen.storyboard */; };
+		DA806AE52306CC2400CE482F /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE42306CC2400CE482F /* CameraManager.swift */; };
+		DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE62306CC3300CE482F /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		DA462BB42306C14A005212BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA462BB72306C14A005212BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA462BB92306C14A005212BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA806AE42306CC2400CE482F /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		DA806AE62306CC3300CE482F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.release.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +73,8 @@
 		DA462BAC2306C149005212BE /* innate */ = {
 			isa = PBXGroup;
 			children = (
+				DA806AE32306C2BC00CE482F /* Managers */,
+				DA806AE22306C2B000CE482F /* ViewControllers */,
 				DA462BAD2306C149005212BE /* AppDelegate.swift */,
 				DA462BAF2306C149005212BE /* ViewController.swift */,
 				DA462BB12306C149005212BE /* Main.storyboard */,
@@ -77,6 +83,22 @@
 				DA462BB92306C14A005212BE /* Info.plist */,
 			);
 			path = innate;
+			sourceTree = "<group>";
+		};
+		DA806AE22306C2B000CE482F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DA806AE32306C2BC00CE482F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DA806AE42306CC2400CE482F /* CameraManager.swift */,
+				DA806AE62306CC3300CE482F /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		F40B34FD670E663EC7D11DCA /* Pods */ = {
@@ -189,6 +211,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-innate/Pods-innate-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CrossroadRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -196,6 +219,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,7 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */,
 				DA462BB02306C149005212BE /* ViewController.swift in Sources */,
+				DA806AE52306CC2400CE482F /* CameraManager.swift in Sources */,
 				DA462BAE2306C149005212BE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +387,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -381,7 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

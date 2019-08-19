@@ -16,7 +16,7 @@ protocol CameraManagerDelegate {
 class CameraManager: NSObject {
     
     static let sharedInstance = CameraManager()
-    let imagePicker = UIImagePickerController()
+    let imagePicker = ImagePickerController()
     var delegate:CameraManagerDelegate? = nil
     
     func openCamera(fromViewController vc:UIViewController) {
@@ -32,17 +32,22 @@ extension CameraManager : UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        defer { picker.dismiss(animated: true) }
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             delegate?.didFailInFetchingCameraImage()
+            picker.dismiss(animated: true)
             return
         }
         
         delegate?.didSucceedInFetchingCameraImage(img: image)
+        picker.dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        defer { picker.dismiss(animated: true) }
         delegate?.didFailInFetchingCameraImage()
+        picker.dismiss(animated: true)
     }
+}
+
+class ImagePickerController: UIImagePickerController {
+    override var prefersStatusBarHidden: Bool { return true }
 }

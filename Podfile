@@ -6,7 +6,7 @@ target 'innate' do
 
   # Pods for innate
   pod 'Alamofire'
-  pod 'SwiftyJSON'
+  pod 'AlamofireImage'
   pod 'CrossroadRegex'
 
 end

@@ -8,5 +8,6 @@ target 'innate' do
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'CrossroadRegex'
+  pod 'ScrollingPageControl'
 
 end

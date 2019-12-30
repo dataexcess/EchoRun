@@ -20,12 +20,27 @@ let kMultipartFormDataMimeTypeKey = "image/jpg"
 let kHeaderAcceptLanguage = "en-US,en-GB,en;q=1.0"
 let kHeaderUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
 
-enum NetworkingError: Error {
+enum NetworkingError: Error, LocalizedError {
     case uploadError
     case parsingError
     case dataError
     case connectionError
     case notFound
+    
+    public var errorDescription: String? {
+        switch self {
+        case .uploadError:
+            return NSLocalizedString("⌿ upload error ⍀", comment: "")
+        case .parsingError:
+            return NSLocalizedString("⌿ parsing error ⍀", comment: "")
+        case .dataError:
+            return NSLocalizedString("⌿ data error ⍀", comment: "")
+        case .connectionError:
+            return NSLocalizedString("⌿ connection error ⍀", comment: "")
+        case .notFound:
+            return NSLocalizedString("⌿ not found ⍀", comment: "")
+        }
+    }
 }
 
 class NetworkManager: NSObject {

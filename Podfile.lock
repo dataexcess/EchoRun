@@ -3,23 +3,27 @@ PODS:
   - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
   - CrossroadRegex (1.1.0)
+  - ScrollingPageControl (0.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - CrossroadRegex
+  - ScrollingPageControl
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - CrossroadRegex
+    - ScrollingPageControl
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
+  ScrollingPageControl: 7642e1f842000eeccf8bc47a5718e4b678e10f10
 
-PODFILE CHECKSUM: 4d3acd7be4c1a236f58afeb1ea02973241b9cb4a
+PODFILE CHECKSUM: 85875d98d978dbbee424f2b6f4c5f103003f461a
 
 COCOAPODS: 1.5.3

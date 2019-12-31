@@ -12,13 +12,14 @@ import AlamofireImage
 import Regex
 
 let kGoogleImageSearchURL = "https://www.google.com/searchbyimage/upload"
-let kRegexVisuallySimilarLink = "href=\"((?:(?!href).)*?)\">Visually similar"
+let kRegexVisuallySimilarLink = "href=((?:(?!href).)*?)>Visually similar" //"href=\"((?:(?!href).)*?)\">Visually similar"
 let kRegexVisuallySimilarImageURLs = "\"ou\":\"((?:(?!\"ou\":\").)*?)\",\"ow\""
 let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
 let kMultipartFormDataMimeTypeKey = "image/jpg"
 let kHeaderAcceptLanguage = "en-US,en-GB,en;q=1.0"
 let kHeaderUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+let kBaseURL = "https://www.google.com"
 
 enum NetworkingError: Error, LocalizedError {
     case uploadError
@@ -43,36 +44,32 @@ enum NetworkingError: Error, LocalizedError {
     }
 }
 
-class NetworkManager: NSObject {
-    static let sharedInstance = NetworkManager()
-    let headers: HTTPHeaders = [
+final class NetworkManager: NSObject {
+    
+    public static let sharedInstance = NetworkManager()
+    private let headers: HTTPHeaders = [
         "Accept-Language": kHeaderAcceptLanguage,
         "User-Agent": kHeaderUserAgent
     ]
     
     func findVisuallySimilarImagesFor(image:UIImage,
                                       withCompletionHandler completionHandler:@escaping (_:[URL])->(),
-                                      andFailureHandler failurehandler:@escaping (_:NetworkingError)->()){
-        
+                                      andFailureHandler failurehandler:@escaping (_:NetworkingError)->()) {
         upload(image: image) {
-            
             response in
             guard let uploadResultURL = self.getImageSearchUploadResultURL(forResponse: response) else {
                 failurehandler(.uploadError); return
             }
             self.request(uploadResultURL) {
-                
                 response in
                 guard let visuallySimilarURL = self.getVisuallySimilarButtonLinkURL(inResponse: response) else {
                     failurehandler(.parsingError); return
                 }
                 self.request(visuallySimilarURL) {
-                    
                     response in
                     guard let imageURLs = self.getVisuallySimilarImageURLs(inResponse: response) else {
                         failurehandler(.notFound); return
                     }
-                    
                     completionHandler(imageURLs)
                 }
             }
@@ -80,31 +77,27 @@ class NetworkManager: NSObject {
     }
     
     func getImageSearchUploadResultURL(forResponse response :DefaultDataResponse) -> URL? {
-        
         guard let metrics = response.metrics else { return nil }
         guard let transactionMetrics = metrics.transactionMetrics[0].response as? HTTPURLResponse else { return nil }
         guard let location = transactionMetrics.allHeaderFields["Location"] else { return nil }
         guard let locationString = location as? String else { return nil }
-        guard let url = URL(string: locationString) else { return nil }
+        guard let URL = URL(string: locationString) else { return nil }
         
-        return url
+        return URL
     }
     
     func getVisuallySimilarButtonLinkURL(inResponse response:String) -> URL? {
-        
-        guard let regexResult = kRegexVisuallySimilarLink.r?.findFirst(in: response)?.group(at: 1) else { return nil }
-        guard let url = URL(string: "https://www.google.com" + regexResult.replacingOccurrences(of: "&amp;", with: "&")) else { return nil }
-        
-        return url
+        guard var regexResult = kRegexVisuallySimilarLink.r?.findFirst(in: response)?.group(at: 1) else { return nil }
+        guard let URLString = (kBaseURL + regexResult.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
+        guard let URL = URL(string: URLString) else { return nil }
+        return URL
     }
     
     func getVisuallySimilarImageURLs(inResponse response:String) -> [URL]? {
-        
         guard let result = kRegexVisuallySimilarImageURLs.r?.findAll(in: response) else { return nil }
-        let urls = result.map{ URL(string: $0.group(at: 1)!)}.compactMap{ $0 }
-        guard urls.count > 0 else { return nil }
-        
-        return urls
+        let URLs = result.map{ URL(string: $0.group(at: 1)!)}.compactMap{ $0 }
+        guard URLs.count > 0 else { return nil }
+        return URLs
     }
     
     //MARK: HELPER METHODS

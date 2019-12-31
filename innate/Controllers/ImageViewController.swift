@@ -159,22 +159,20 @@ class ImageViewController: UIViewController {
         activityIndicator.alignCenter(toParentView: imageView)
     }
     
-    func loadImage(forURL url: URL, withCompletionHandler completionHandler: (()->())?) {
+    func loadImage(forURL url: URL, withCompletionHandler completionHandler: (()->Void)?) {
         activityIndicator.start()
-        NetworkManager.sharedInstance.download(imageURL: url,
-                                               withCompletionHandler: {
+        NetworkManager.sharedInstance.download(imageURL: url, withCompletionHandler: {
+            
+            image in
+            self.imageView.image = image
+            self.activityIndicator.stop()
+            completionHandler?()
+        }, andFailureHandler: {
                                                 
-                                                image in
-                                                self.imageView.image = image
-                                                self.activityIndicator.stop()
-                                                completionHandler?()
-        },
-                                               andFailureHandler: {
-                                                
-                                                error in
-                                                debugPrint(error)
-                                                self.activityIndicator.stop()
-                                                self.activityIndicator.text = error.localizedDescription
+            error in
+            debugPrint(error)
+            self.activityIndicator.stop()
+            self.activityIndicator.text = error.localizedDescription
         })
     }
     

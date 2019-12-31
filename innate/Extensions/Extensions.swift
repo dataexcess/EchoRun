@@ -51,6 +51,20 @@ extension UIView {
         superView.addConstraints([width, height])
     }
     
+    func equalHeight(toParentView superView:UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal,
+                                        toItem: superView, attribute: .height, multiplier: 1.0, constant: 0)
+        superView.addConstraint(height)
+    }
+    
+    func equalWidth(toParentView superView:UIView, withRatio ratio:CGFloat = 1.0) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let width = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal,
+                                       toItem: superView, attribute: .width, multiplier: ratio, constant: 0)
+        superView.addConstraint(width)
+    }
+    
     func alignCenter(toParentView superView:UIView) {
         self.translatesAutoresizingMaskIntoConstraints = false
         let centerX = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal,
@@ -110,5 +124,38 @@ extension String {
             self = self.replacingOccurrences(of: escaped_char, with: unescaped_char, options: NSString.CompareOptions.literal, range: nil)
         }
         return self
+    }
+}
+
+extension UIApplication {
+    
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}
+
+extension UIScrollView {
+    
+    func scrollToPage(withIndex index:Int, animated:Bool) {
+        let offset = CGPoint(x: bounds.width * CGFloat(index), y: 0)
+        setContentOffset(offset, animated: animated)
+    }
+    
+    var pageControlIndex:Int {
+        get {
+            return Int( floor((contentOffset.x - frame.size.width / 2) / frame.size.width) + 1)
+        }
+        set { }
     }
 }

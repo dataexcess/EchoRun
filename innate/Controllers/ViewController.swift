@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ScrollingPageControl
 
 final class ViewController: UIViewController {
     
@@ -18,27 +19,88 @@ final class ViewController: UIViewController {
     @IBOutlet weak var libraryButton: Button!
     @IBOutlet weak var addNewButton: UIButton!
     @IBOutlet weak var inputCancelAreView: UIView!
-    private var pageViewController = PageViewController(transitionStyle: .scroll,
-                                                        navigationOrientation: .horizontal,
-                                                        options: [:])
+    private var scrollViewContainer:UnclippedView!
+    private var scrollView:UIScrollView!
+    private var imagesStackView:UIStackView!
+    private var pageControl:ScrollingPageControl!
+    private var scrollViewWidthConstraint:NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         PhotoManager.sharedInstance.delegate = self
+        setupButtons()
+        setupInputCancelArea()
+        setupScrollView()
+        setupImagesStackView()
+        setupPageControl()
+    }
+    
+    private func setupButtons() {
         cameraButton.type = .Camera
         cameraButton.delegate = self
         libraryButton.type = .Library
         libraryButton.delegate = self
         addNewButton.isHidden = true
-        setupInputCancelArea()
+    }
+    
+    private func setupScrollView() {
+        scrollViewContainer = UnclippedView()
+        view.addSubview(scrollViewContainer)
+        view.sendSubviewToBack(scrollViewContainer)
+        scrollViewContainer.pinBottomTopLeftRight(toParentView: view)
+        
+        scrollView = UIScrollView()
+        scrollViewContainer.addSubview(scrollView)
+        scrollViewContainer.scrollView = scrollView
+        scrollView.pinTopBottom(toParentView: scrollViewContainer, withPadding: 0)
+        scrollView.equalHeight(toParentView: scrollViewContainer)
+        scrollView.alignCenterX(toParentView: scrollViewContainer)
+        toggleScrollViewLandscapeConstraint(isLandscape: true)
+        scrollView.layer.masksToBounds = false
+        scrollView.isPagingEnabled = true
+        scrollView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        view.sendSubviewToBack(pageViewController.view)
-        pageViewController.view.pinBottomTopLeftRight(toParentView: view)
+        let isLandscape = view.bounds.width > view.bounds.height
+        toggleScrollViewLandscapeConstraint(isLandscape: isLandscape)
+    }
+    
+    private func toggleScrollViewLandscapeConstraint(isLandscape:Bool) {
+        if scrollViewWidthConstraint != nil { scrollViewContainer.removeConstraint(scrollViewWidthConstraint) }
+        scrollViewWidthConstraint = NSLayoutConstraint(item: scrollView!,
+                                                      attribute: .width,
+                                                      relatedBy: .equal,
+                                                      toItem: scrollViewContainer,
+                                                      attribute: .width,
+                                                      multiplier: isLandscape ? 1/3 : 1.0,
+                                                      constant: 0)
+        scrollViewContainer.addConstraint(scrollViewWidthConstraint)
+        scrollViewContainer.updateConstraints()
+    }
+    
+    private func setupImagesStackView() {
+        imagesStackView = UIStackView()
+        scrollView.addSubview(imagesStackView)
+        imagesStackView.pinBottomTopLeftRight(toParentView: scrollView)
+        imagesStackView.axis = .horizontal
+        imagesStackView.distribution = .fillEqually
+        let firstImage = ImageResultView()
+        imagesStackView.addArrangedSubview(firstImage)
+        firstImage.equalWidthAndHeight(toParentView: scrollView)
+    }
+    
+    func setupPageControl() {
+        pageControl = ScrollingPageControl(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 20)))
+        pageControl = ScrollingPageControl()
+        view.addSubview(pageControl)
+        view.bringSubviewToFront(pageControl)
+        pageControl.alignCenterX(toParentView: view)
+        pageControl.alignCenterY(toParentView: view, withOffset: Int( (UIScreen.main.bounds.width / 2) + 14 ))
+        pageControl.isHidden = true
+        pageControl.dotColor = UIColor.darkGray
+        pageControl.selectedColor = UIColor.white
     }
     
     func setupInputCancelArea() {
@@ -48,30 +110,67 @@ final class ViewController: UIViewController {
     @objc func didTapCancelArea() {
         buttonsContainerView.isHidden = true
         addNewButton.isHidden = false
+        pageControl.isHidden = false
     }
     
     fileprivate func didPressCameraButton(_ sender: Any) {
-        pageViewController.pages.first?.imageView.image = nil
+        resetImageStackView()
         PhotoManager.sharedInstance.openCamera(fromViewController: self)
     }
     
     fileprivate func didPressLibraryButton(_ sender: Any) {
-        pageViewController.pages.first?.imageView.image = nil
+        resetImageStackView()
         PhotoManager.sharedInstance.openLibrary(fromViewController: self)
     }
     
     @IBAction func didPressNewButton(_ sender: Any) {
         buttonsContainerView.isHidden = false
         addNewButton.isHidden = true
+        pageControl.isHidden = true
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        //buttonsStackView.axis = (size.width > size.height) ? .horizontal : .vertical
+        let index = pageControl.selectedPage
+        coordinator.animateAlongsideTransition(in: nil, animation: {
+            context in
+            self.toggleScrollViewLandscapeConstraint(isLandscape: size.width > size.height)
+            self.scrollView.scrollToPage(withIndex: index, animated: false)
+        })
+    }
+    
+    private func setupPageControlPages(forAmount amount:Int) {
+        if amount <= 5 {
+            pageControl.maxDots = 5
+            pageControl.centerDots = 5
+        } else {
+            pageControl.maxDots = 7
+            pageControl.centerDots = 3
+        }
+        pageControl.pages = (amount + 1)
+    }
+    
+    private func resetImageStackView() {
+        imagesStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        let firstImage = ImageResultView()
+        imagesStackView.addArrangedSubview(firstImage)
+        firstImage.equalWidthAndHeight(toParentView: scrollView)
+        pageControl.isHidden = true
+        pageControl.pages = 0
     }
 }
 
-extension ViewController : PhotoManagerDelegate {
+extension ViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentIndex = scrollView.pageControlIndex
+        if currentIndex != pageControl.selectedPage {
+            pageControl.selectedPage = currentIndex
+        }
+    }
+}
+
+extension ViewController: PhotoManagerDelegate {
     
     func didFailInFetchingImage() {
         print("FAIL")
@@ -81,27 +180,26 @@ extension ViewController : PhotoManagerDelegate {
         buttonsContainerView.isHidden = true
         addNewButton.isHidden = false
         activityIndicator.start()
-        pageViewController.resetPages()
-        pageViewController.setFirstImage(image: cameraImage)
-        NetworkManager.sharedInstance.findVisuallySimilarImagesFor(image: cameraImage,
-                                                                   withCompletionHandler: {
-                                                                    
-                                                                    imageURLS in
-                                                                    let firstImageURL = imageURLS.first!
-                                                                    self.pageViewController.addNewPages(withAmount: imageURLS.count)
-                                                                    self.pageViewController.loadAndPresentFirstResult(withURL: firstImageURL) {
-                                                                        
-                                                                        self.activityIndicator.stop()
-                                                                        guard imageURLS.count > 1 else { return }
-                                                                        let remainingURLs = Array(imageURLS.dropFirst())
-                                                                        self.pageViewController.loadRemainingResults(with: remainingURLs)
-                                                                    }
-        },
-                                                                   andFailureHandler: {
-                                                                    
-                                                                    error in
-                                                                    self.activityIndicator.stop()
-                                                                    self.activityIndicator.text = error.localizedDescription
+        (imagesStackView.arrangedSubviews.first as! ImageResultView).imageView.image = cameraImage
+        NetworkManager.sharedInstance.findVisuallySimilarImagesFor(image: cameraImage, withCompletionHandler: {
+        imageURLS in
+            guard let firstImageURL = imageURLS.first else { return }
+            for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
+            (self.imagesStackView.arrangedSubviews[1] as! ImageResultView).loadImage(forURL: firstImageURL) {
+                self.scrollView.scrollToPage(withIndex: 1, animated: true)
+                self.setupPageControlPages(forAmount: imageURLS.count)
+                self.pageControl.isHidden = false
+                self.activityIndicator.stop()
+                guard imageURLS.count > 1 else { return }
+                let remainingURLs = Array(imageURLS.dropFirst())
+                for (idx, url) in remainingURLs.enumerated() {
+                    (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView).loadImage(forURL: url, withCompletionHandler: nil)
+                }
+            }
+        }, andFailureHandler: {
+        error in
+            self.activityIndicator.stop()
+            self.activityIndicator.text = error.localizedDescription
         })
     }
     
@@ -122,10 +220,9 @@ extension ViewController : PhotoManagerDelegate {
     }
 }
 
-extension ViewController : ButtonDelegate {
+extension ViewController: ButtonDelegate {
     
     func didTap(button: Button) {
-        
         switch button.type {
             case .Camera:
                 didPressCameraButton(button)

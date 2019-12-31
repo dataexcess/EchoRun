@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5CDA0D493F1DA3E7BB1B61F6 /* Pods_innate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B69C7B773029D6F56163145 /* Pods_innate.framework */; };
 		DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D0E230ADB50003BC924 /* Extensions.swift */; };
-		DA0F6D11230ADFBC003BC924 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D10230ADFBC003BC924 /* PageViewController.swift */; };
 		DA0F6D13230AE004003BC924 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D12230AE004003BC924 /* ImageViewController.swift */; };
 		DA44B1172365F64C00FEDB44 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */; };
 		DA44B1182365F64C00FEDB44 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1162365F60B00FEDB44 /* Roboto-Medium.ttf */; };
@@ -28,6 +27,8 @@
 		DA6E62AF23129937004A5B76 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E62AE23129937004A5B76 /* Button.swift */; };
 		DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE42306CC2400CE482F /* PhotoManager.swift */; };
 		DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE62306CC3300CE482F /* NetworkManager.swift */; };
+		DAECFF5023BB466D00594601 /* ImageResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF4F23BB466D00594601 /* ImageResultView.swift */; };
+		DAECFF5223BB581000594601 /* UnclippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF5123BB581000594601 /* UnclippedView.swift */; };
 		DAFE89DE23BAA3930033B8C3 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +36,6 @@
 		2B69C7B773029D6F56163145 /* Pods_innate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_innate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.debug.xcconfig"; sourceTree = "<group>"; };
 		DA0F6D0E230ADB50003BC924 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		DA0F6D10230ADFBC003BC924 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		DA0F6D12230AE004003BC924 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		DA44B1142365F60A00FEDB44 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -56,6 +56,8 @@
 		DA6E62AE23129937004A5B76 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		DA806AE42306CC2400CE482F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		DA806AE62306CC3300CE482F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DAECFF4F23BB466D00594601 /* ImageResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultView.swift; sourceTree = "<group>"; };
+		DAECFF5123BB581000594601 /* UnclippedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclippedView.swift; sourceTree = "<group>"; };
 		DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.release.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +139,9 @@
 		DA6E62AD23129922004A5B76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DAECFF5123BB581000594601 /* UnclippedView.swift */,
 				DA6E62AE23129937004A5B76 /* Button.swift */,
+				DAECFF4F23BB466D00594601 /* ImageResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,7 +151,6 @@
 			children = (
 				DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */,
 				DA462BAF2306C149005212BE /* ViewController.swift */,
-				DA0F6D10230ADFBC003BC924 /* PageViewController.swift */,
 				DA0F6D12230AE004003BC924 /* ImageViewController.swift */,
 			);
 			path = Controllers;
@@ -313,10 +316,11 @@
 				DA462BB02306C149005212BE /* ViewController.swift in Sources */,
 				DA0F6D13230AE004003BC924 /* ImageViewController.swift in Sources */,
 				DA6E62AF23129937004A5B76 /* Button.swift in Sources */,
-				DA0F6D11230ADFBC003BC924 /* PageViewController.swift in Sources */,
 				DAFE89DE23BAA3930033B8C3 /* ActivityIndicatorView.swift in Sources */,
 				DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */,
 				DA462BAE2306C149005212BE /* AppDelegate.swift in Sources */,
+				DAECFF5023BB466D00594601 /* ImageResultView.swift in Sources */,
+				DAECFF5223BB581000594601 /* UnclippedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

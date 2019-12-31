@@ -11,6 +11,7 @@ import UIKit
 class UnclippedView: UIView {
     
     @IBOutlet weak var scrollView:UIScrollView!
+    @IBOutlet weak var stackView:UIStackView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,12 +28,22 @@ class UnclippedView: UIView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return self.point(inside: point, with: event) ? scrollView : nil
+        var hitView:UIView!
+        stackView.arrangedSubviews.forEach {
+            view in
+            let point = CGPoint(x: (scrollView.contentOffset.x - scrollView.frame.origin.x) + point.x,
+                                y: (scrollView.contentOffset.y - scrollView.frame.origin.y) + point.y)
+            let pointt = view.convert(point, from: scrollView)
+            if view.point(inside: pointt, with: event) {
+                hitView = (view as! ImageResultView).imageContainerView
+            }
+        }
+        return hitView
     }
 }
 
 class UnclippedScrollView: UIScrollView {
-
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -45,6 +56,11 @@ class UnclippedScrollView: UIScrollView {
     
     func setup() {
         layer.masksToBounds = false
+        contentInset = .zero
+    }
+    
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        return false
     }
 }
 

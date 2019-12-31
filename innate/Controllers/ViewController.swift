@@ -20,7 +20,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var addNewButton: UIButton!
     @IBOutlet weak var inputCancelAreView: UIView!
     private var scrollViewContainer:UnclippedView!
-    private var scrollView:UIScrollView!
+    private var scrollView:UnclippedScrollView!
     private var imagesStackView:UIStackView!
     private var pageControl:ScrollingPageControl!
     private var scrollViewWidthConstraint:NSLayoutConstraint!
@@ -44,12 +44,14 @@ final class ViewController: UIViewController {
     }
     
     private func setupScrollView() {
+        automaticallyAdjustsScrollViewInsets = false
+        
         scrollViewContainer = UnclippedView()
         view.addSubview(scrollViewContainer)
         view.sendSubviewToBack(scrollViewContainer)
         scrollViewContainer.pinBottomTopLeftRight(toParentView: view)
         
-        scrollView = UIScrollView()
+        scrollView = UnclippedScrollView()
         scrollViewContainer.addSubview(scrollView)
         scrollViewContainer.scrollView = scrollView
         scrollView.pinTopBottom(toParentView: scrollViewContainer, withPadding: 0)
@@ -86,9 +88,16 @@ final class ViewController: UIViewController {
         imagesStackView.pinBottomTopLeftRight(toParentView: scrollView)
         imagesStackView.axis = .horizontal
         imagesStackView.distribution = .fillEqually
+        imagesStackView.alignment = .fill
+        imagesStackView.spacing = 0
         let firstImage = ImageResultView()
         imagesStackView.addArrangedSubview(firstImage)
         firstImage.equalWidthAndHeight(toParentView: scrollView)
+        
+        scrollViewContainer.stackView = imagesStackView
+        
+        print(scrollView.bounds)
+        print(firstImage.bounds)
     }
     
     func setupPageControl() {

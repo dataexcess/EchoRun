@@ -35,21 +35,16 @@ class ImageResultView: UIView {
         imageView = ImageView()
         activityIndicator = ActivityIndicatorView()
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didPerformLongPress))
+        longPressRecognizer.minimumPressDuration = 0.5
+        imageContainerView.addGestureRecognizer(longPressRecognizer)
         setupViews()
     }
     
     func setupViews() {
-        createConstraints()
         setupScrollView()
         setupImageContainerView()
         setupImageView()
         setupActivityIndicatorView()
-        setupImageSaveAction()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //setupImageViewWidthContraints()
     }
     
     private func setupScrollView() {
@@ -72,7 +67,6 @@ class ImageResultView: UIView {
     private func setupImageView() {
         imageContainerView.addSubview(imageView)
         imageView.alignCenter(toParentView: imageContainerView)
-        //setupImageViewWidthContraints()
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
@@ -100,69 +94,6 @@ class ImageResultView: UIView {
         imageContainerView.addConstraints(portraitConstraints)
     }
     
-//    private func setupImageViewWidthContraints() {
-//        if let size = UIApplication.shared.keyWindow?.bounds.size {
-//            setupImageViewWidthContraints(forSize: size)
-//        }
-//    }
-    
-//    private func setupImageViewWidthContraints(forSize size:CGSize) {
-//        let isPortrait = size.height > size.width
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageContainerView.removeConstraints(isPortrait ? landscapeConstraints : portraitConstraints)
-//        imageContainerView.addConstraints(isPortrait ? portraitConstraints: landscapeConstraints)
-//    }
-    
-    private func createConstraints() {
-        portraitConstraints = [NSLayoutConstraint(item: imageView!,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: imageView!,
-                                                  attribute: .width,
-                                                  multiplier: 1.0,
-                                                  constant: 0),
-                               NSLayoutConstraint(item: imageView!,
-                                                  attribute: .left,
-                                                  relatedBy: .equal,
-                                                  toItem: imageContainerView!,
-                                                  attribute: .left,
-                                                  multiplier: 1.0,
-                                                  constant: 10),
-                               NSLayoutConstraint(item: imageView!,
-                                                  attribute: .right,
-                                                  relatedBy: .equal,
-                                                  toItem: imageContainerView!,
-                                                  attribute: .right,
-                                                  multiplier: 1.0,
-                                                  constant: -10)]
-        landscapeConstraints = [NSLayoutConstraint(item: imageView!,
-                                                   attribute: .width,
-                                                   relatedBy: .equal,
-                                                   toItem: imageView!,
-                                                   attribute: .height,
-                                                   multiplier: 1.0,
-                                                   constant: 0),
-                                NSLayoutConstraint(item: imageView!,
-                                                   attribute: .top,
-                                                   relatedBy: .equal,
-                                                   toItem: imageContainerView!,
-                                                   attribute: .top,
-                                                   multiplier: 1.0,
-                                                   constant: 10),
-                                NSLayoutConstraint(item: imageView!,
-                                                   attribute: .bottom,
-                                                   relatedBy: .equal,
-                                                   toItem: imageContainerView!,
-                                                   attribute: .bottom,
-                                                   multiplier: 1.0,
-                                                   constant: -10)]
-    }
-    
-    private func setupImageSaveAction() {
-        longPressRecognizer.minimumPressDuration = 0.5
-        imageView.addGestureRecognizer(longPressRecognizer)
-    }
-    
     @objc private func didPerformLongPress() {
         guard let image = imageView.image else { return }
         presentSavingDialog(withImage: image)
@@ -182,7 +113,9 @@ class ImageResultView: UIView {
             alert.dismiss(animated: true, completion: nil)
         }))
         
-        UIApplication.topViewController()!.present(alert, animated: true, completion: nil)
+        if !UIApplication.topViewController()!.isKind(of: AlertController.self) {
+            UIApplication.topViewController()!.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func setupActivityIndicatorView() {
@@ -206,11 +139,16 @@ class ImageResultView: UIView {
             self.activityIndicator.text = error.localizedDescription
         })
     }
-//
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        setupImageViewWidthContraints(forSize: size)
-//    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        print("zozoozozoozozozooz")
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        print("jdlflfdkjldkfj")
+    }
 }
 
 extension ImageResultView : UIScrollViewDelegate {

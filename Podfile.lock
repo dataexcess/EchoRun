@@ -12,7 +12,7 @@ DEPENDENCIES:
   - ScrollingPageControl
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - CrossroadRegex
@@ -26,4 +26,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 85875d98d978dbbee424f2b6f4c5f103003f461a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

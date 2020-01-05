@@ -29,6 +29,7 @@
 		DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE62306CC3300CE482F /* NetworkManager.swift */; };
 		DAECFF5023BB466D00594601 /* ImageResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF4F23BB466D00594601 /* ImageResultView.swift */; };
 		DAECFF5223BB581000594601 /* UnclippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF5123BB581000594601 /* UnclippedView.swift */; };
+		DAF9AB0623C24DB300BA11E1 /* CollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF9AB0523C24DB300BA11E1 /* CollectionFlowLayout.swift */; };
 		DAFE89DE23BAA3930033B8C3 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		DA806AE62306CC3300CE482F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DAECFF4F23BB466D00594601 /* ImageResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultView.swift; sourceTree = "<group>"; };
 		DAECFF5123BB581000594601 /* UnclippedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclippedView.swift; sourceTree = "<group>"; };
+		DAF9AB0523C24DB300BA11E1 /* CollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFlowLayout.swift; sourceTree = "<group>"; };
 		DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.release.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +154,7 @@
 				DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */,
 				DA462BAF2306C149005212BE /* ViewController.swift */,
 				DA0F6D12230AE004003BC924 /* ImageViewController.swift */,
+				DAF9AB0523C24DB300BA11E1 /* CollectionFlowLayout.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */,
+				DAF9AB0623C24DB300BA11E1 /* CollectionFlowLayout.swift in Sources */,
 				DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */,
 				DA462BB02306C149005212BE /* ViewController.swift in Sources */,
 				DA0F6D13230AE004003BC924 /* ImageViewController.swift in Sources */,

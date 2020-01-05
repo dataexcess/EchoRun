@@ -25,6 +25,9 @@ final class ViewController: UIViewController {
     private var pageControl:ScrollingPageControl!
     private var scrollViewWidthConstraint:NSLayoutConstraint!
     
+    private var collectionView:UICollectionView!
+    private var imageURLS:[URL]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         PhotoManager.sharedInstance.delegate = self
@@ -33,6 +36,8 @@ final class ViewController: UIViewController {
         setupScrollView()
         setupImagesStackView()
         setupPageControl()
+        
+        setupCollectionView()
     }
     
     private func setupButtons() {
@@ -41,6 +46,17 @@ final class ViewController: UIViewController {
         libraryButton.type = .Library
         libraryButton.delegate = self
         addNewButton.isHidden = true
+    }
+    
+    private func setupCollectionView() {
+        let flowLayout = CollectionFlowLayout()
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
+        view.addSubview(collectionView)
+        view.sendSubviewToBack(collectionView)
+        collectionView.pinBottomTopLeftRight(toParentView: view)
     }
     
     private func setupScrollView() {
@@ -192,6 +208,8 @@ extension ViewController: PhotoManagerDelegate {
         (imagesStackView.arrangedSubviews.first as! ImageResultView).imageView.image = cameraImage
         NetworkManager.sharedInstance.findVisuallySimilarImagesFor(image: cameraImage, withCompletionHandler: {
         imageURLS in
+            self.imageURLS = imageURLS
+            self.collectionView.reloadData()
             guard let firstImageURL = imageURLS.first else { return }
             for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
             (self.imagesStackView.arrangedSubviews[1] as! ImageResultView).loadImage(forURL: firstImageURL) {
@@ -239,5 +257,43 @@ extension ViewController: ButtonDelegate {
                 didPressLibraryButton(button)
             default: break
         }
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.imageURLS?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegate {
+
+}
+
+
+class ImageCell: UICollectionViewCell {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
+        backgroundColor = .red
     }
 }

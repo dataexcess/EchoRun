@@ -19,11 +19,13 @@ final class ViewController: UIViewController {
     @IBOutlet weak var libraryButton: Button!
     @IBOutlet weak var addNewButton: UIButton!
     @IBOutlet weak var inputCancelAreView: UIView!
+    private var container:UIView = { let view = UIView(); view.backgroundColor = .black; return view }()
     private var scrollViewContainer:UnclippedView!
     private var scrollView:UnclippedScrollView!
     private var imagesStackView:UIStackView!
     private var pageControl:ScrollingPageControl!
     private var scrollViewWidthConstraint:NSLayoutConstraint!
+    private var containerLeftConstraint:NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +48,22 @@ final class ViewController: UIViewController {
     private func setupScrollView() {
         automaticallyAdjustsScrollViewInsets = false
         
-        scrollViewContainer = UnclippedView()
-        view.addSubview(scrollViewContainer)
-        view.sendSubviewToBack(scrollViewContainer)
-        scrollViewContainer.pinBottomTopLeftRight(toParentView: view)
+        //setup main view container
+        view.addSubview(container)
+        view.sendSubviewToBack(container)
+        container.pinTopBottom(toParentView: view, withPadding: 0)
+        container.pinRight(toParentView: view, withPadding: 0)
+        containerLeftConstraint = NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal,
+                                                     toItem: view, attribute: .left, multiplier: 1.0, constant: 0)
+        view.addConstraint(containerLeftConstraint)
         
+        //setup scrollview container
+        scrollViewContainer = UnclippedView()
+        container.addSubview(scrollViewContainer)
+        container.sendSubviewToBack(scrollViewContainer)
+        scrollViewContainer.pinBottomTopLeftRight(toParentView: container)
+        
+        //setup scrollview
         scrollView = UnclippedScrollView()
         scrollViewContainer.addSubview(scrollView)
         scrollViewContainer.scrollView = scrollView
@@ -79,7 +92,17 @@ final class ViewController: UIViewController {
                                                       multiplier: isLandscape ? 1/3 : 1.0,
                                                       constant: 0)
         scrollViewContainer.addConstraint(scrollViewWidthConstraint)
+        calculateLeftOffsetForUnevenDeviceWidth()
         scrollViewContainer.updateConstraints()
+    }
+    
+    private func calculateLeftOffsetForUnevenDeviceWidth() {
+        let remainder = Double(UIScreen.main.bounds.width).remainder(dividingBy: 3)
+        let division = floor(Double(UIScreen.main.bounds.width) / 3)
+        if remainder != 0 {
+            let offset = Double(UIScreen.main.bounds.width) - (division * 3)
+            containerLeftConstraint.constant = CGFloat(offset)
+        }
     }
     
     private func setupImagesStackView() {

@@ -33,11 +33,25 @@ extension UIView {
         superView.addConstraints([left, right])
     }
     
+    func pinLeft(toParentView superView:UIView, withPadding padding:Int) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let left = NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal,
+                                      toItem: superView, attribute: .left, multiplier: 1.0, constant: CGFloat(padding))
+        superView.addConstraint(left)
+    }
+    
+    func pinRight(toParentView superView:UIView, withPadding padding:Int) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let right = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal,
+                                      toItem: superView, attribute: .right, multiplier: 1.0, constant: CGFloat(padding))
+        superView.addConstraint(right)
+    }
+    
     func pinTopBottom(toParentView superView:UIView, withPadding padding:Int) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .greaterThanOrEqual,
+        let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal,
                                       toItem: superView, attribute: .top, multiplier: 1.0, constant: CGFloat(padding))
-        let bottom = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .greaterThanOrEqual,
+        let bottom = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal,
                                        toItem: superView, attribute: .bottom, multiplier: 1.0, constant: CGFloat(padding))
         superView.addConstraints([top, bottom])
     }

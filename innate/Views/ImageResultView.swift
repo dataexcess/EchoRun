@@ -123,7 +123,9 @@ class ImageResultView: UIView {
         activityIndicator.alignCenter(toParentView: imageView)
     }
     
-    func loadImage(forURL url: URL, withCompletionHandler completionHandler: (()->Void)?) {
+    func loadImage(forURL url: URL,
+                   withCompletionHandler completionHandler: (()->Void)?,
+                   andFailureHandler failureHandler: (()->Void)?) {
         activityIndicator.start()
         NetworkManager.sharedInstance.download(imageURL: url, withCompletionHandler: {
             
@@ -137,6 +139,7 @@ class ImageResultView: UIView {
             debugPrint(error)
             self.activityIndicator.stop()
             self.activityIndicator.text = error.localizedDescription
+            failureHandler?()
         })
     }
     

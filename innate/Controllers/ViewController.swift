@@ -205,7 +205,7 @@ extension ViewController: UIScrollViewDelegate {
 extension ViewController: PhotoManagerDelegate {
     
     func didFailInFetchingImage() {
-        print("FAIL")
+        print("Did Fail to fetch image from camera or library")
     }
     
     func didSucceedInFetchingImage(cameraImage: UIImage) {
@@ -217,7 +217,7 @@ extension ViewController: PhotoManagerDelegate {
         imageURLS in
             guard let firstImageURL = imageURLS.first else { return }
             for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
-            (self.imagesStackView.arrangedSubviews[1] as! ImageResultView).loadImage(forURL: firstImageURL) {
+            (self.imagesStackView.arrangedSubviews[1] as! ImageResultView).loadImage(forURL: firstImageURL, withCompletionHandler: {
                 self.scrollView.scrollToPage(withIndex: 1, animated: true)
                 self.setupPageControlPages(forAmount: imageURLS.count)
                 self.pageControl.isHidden = false
@@ -225,9 +225,12 @@ extension ViewController: PhotoManagerDelegate {
                 guard imageURLS.count > 1 else { return }
                 let remainingURLs = Array(imageURLS.dropFirst())
                 for (idx, url) in remainingURLs.enumerated() {
-                    (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView).loadImage(forURL: url, withCompletionHandler: nil)
+                    let subview = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
+                    subview.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
+                        subview.removeFromSuperview()
+                    })
                 }
-            }
+            }, andFailureHandler: nil)
         }, andFailureHandler: {
         error in
             self.activityIndicator.stop()

@@ -88,7 +88,8 @@ final class NetworkManager: NSObject {
     
     func getVisuallySimilarButtonLinkURL(inResponse response:String) -> URL? {
         guard var regexResult = kRegexVisuallySimilarLink.r?.findFirst(in: response)?.group(at: 1) else { return nil }
-        guard let URLString = (kBaseURL + regexResult.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
+        guard var URLString = (kBaseURL + regexResult.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
+        if URLString.last == ">" { URLString = String(URLString.dropLast()) }
         guard let URL = URL(string: URLString) else { return nil }
         return URL
     }

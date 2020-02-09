@@ -12,8 +12,8 @@ import AlamofireImage
 import Regex
 
 let kGoogleImageSearchURL = "https://www.google.com/searchbyimage/upload"
-let kRegexVisuallySimilarLink = "href=((?:(?!href).)*?)>Visually similar" //"href=\"((?:(?!href).)*?)\">Visually similar"
-let kRegexVisuallySimilarImageURLs = "\"ou\":\"((?:(?!\"ou\":\").)*?)\",\"ow\""
+let kRegexVisuallySimilarLink = "href=((?:(?!href).)*?)>Visually similar"
+let kRegexVisuallySimilarImageURLs = "(http[^\\s]+(jpg|jpeg|png|tiff)\\b)"
 let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
 let kMultipartFormDataMimeTypeKey = "image/jpg"
@@ -94,8 +94,9 @@ final class NetworkManager: NSObject {
     }
     
     func getVisuallySimilarImageURLs(inResponse response:String) -> [URL]? {
-        guard let result = kRegexVisuallySimilarImageURLs.r?.findAll(in: response) else { return nil }
-        let URLs = result.map{ URL(string: $0.group(at: 1)!)}.compactMap{ $0 }
+        let matched = matches(for: kRegexVisuallySimilarImageURLs, in: response)
+        let filtered = matched.filter({ (match:String) -> Bool in !match.contains("google") }).filter({ (match:String) -> Bool in !match.contains("gstatic") })
+        let URLs = filtered.map{ URL(string: $0)}.compactMap{ $0 }
         guard URLs.count > 0 else { return nil }
         return URLs
     }
@@ -155,6 +156,18 @@ final class NetworkManager: NSObject {
             response in
             guard let image = response.result.value else { failureHandler(.dataError); return }
             completionHandler(image)
+        }
+    }
+    
+    func matches(for regex: String!, in text: String!) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex, options: [])
+            let nsString = text as NSString
+            let results = regex.matches(in: text, range: NSMakeRange(0, nsString.length))
+            return results.map { nsString.substring(with: $0.range)}
+        } catch let error as NSError {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
         }
     }
 }

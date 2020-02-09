@@ -9,5 +9,6 @@ target 'innate' do
   pod 'AlamofireImage'
   pod 'CrossroadRegex'
   pod 'ScrollingPageControl'
+  pod 'Siren'
 
 end

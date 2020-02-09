@@ -217,7 +217,8 @@ extension ViewController: PhotoManagerDelegate {
         imageURLS in
             guard let firstImageURL = imageURLS.first else { return }
             for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
-            (self.imagesStackView.arrangedSubviews[1] as! ImageResultView).loadImage(forURL: firstImageURL, withCompletionHandler: {
+            let firstResult = (self.imagesStackView.arrangedSubviews[1] as! ImageResultView)
+            firstResult.loadImage(forURL: firstImageURL, withCompletionHandler: {
                 self.scrollView.scrollToPage(withIndex: 1, animated: true)
                 self.setupPageControlPages(forAmount: imageURLS.count)
                 self.pageControl.isHidden = false
@@ -225,12 +226,14 @@ extension ViewController: PhotoManagerDelegate {
                 guard imageURLS.count > 1 else { return }
                 let remainingURLs = Array(imageURLS.dropFirst())
                 for (idx, url) in remainingURLs.enumerated() {
-                    let subview = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
-                    subview.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
-                        subview.removeFromSuperview()
+                    let result = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
+                    result.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
+                        result.removeFromSuperview()
                     })
                 }
-            }, andFailureHandler: nil)
+            }, andFailureHandler: {
+                firstResult.removeFromSuperview()
+            })
         }, andFailureHandler: {
         error in
             self.activityIndicator.stop()

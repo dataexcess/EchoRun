@@ -35,6 +35,7 @@
 	<string>We need to access the library so the user can choose a photo to search for results</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>bayer.ttf</string>
 		<string>ManifontGroteskBookItalic.ttf</string>
 		<string>Roboto-Bold.ttf</string>
 		<string>ManifontGroteskBook.ttf</string>

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5CDA0D493F1DA3E7BB1B61F6 /* Pods_innate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B69C7B773029D6F56163145 /* Pods_innate.framework */; };
 		DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D0E230ADB50003BC924 /* Extensions.swift */; };
-		DA0F6D13230AE004003BC924 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D12230AE004003BC924 /* ImageViewController.swift */; };
+		DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA423E2D2417C387007BDEC2 /* bayer.ttf */; };
 		DA44B1172365F64C00FEDB44 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */; };
 		DA44B1182365F64C00FEDB44 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1162365F60B00FEDB44 /* Roboto-Medium.ttf */; };
 		DA44B1192365F64C00FEDB44 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1142365F60A00FEDB44 /* Roboto-Regular.ttf */; };
@@ -36,7 +36,7 @@
 		2B69C7B773029D6F56163145 /* Pods_innate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_innate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.debug.xcconfig"; sourceTree = "<group>"; };
 		DA0F6D0E230ADB50003BC924 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		DA0F6D12230AE004003BC924 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		DA423E2D2417C387007BDEC2 /* bayer.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bayer.ttf; sourceTree = "<group>"; };
 		DA44B1142365F60A00FEDB44 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		DA44B1162365F60B00FEDB44 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -124,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				DA5953CE2313203E006BE93C /* ManifontGroteskBookItalic.ttf */,
+				DA423E2D2417C387007BDEC2 /* bayer.ttf */,
 				DA5953D023132047006BE93C /* ManifontGroteskBook.ttf */,
 				DA5953D22313215D006BE93C /* LetterGothicStd-Bold.otf */,
 				DA5953D52313215D006BE93C /* LetterGothicStd-BoldSlanted.otf */,
@@ -151,7 +152,6 @@
 			children = (
 				DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */,
 				DA462BAF2306C149005212BE /* ViewController.swift */,
-				DA0F6D12230AE004003BC924 /* ImageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +257,7 @@
 				DA462BB52306C14A005212BE /* Assets.xcassets in Resources */,
 				DA5953D623132162006BE93C /* LetterGothicStd-Bold.otf in Resources */,
 				DA5953D723132165006BE93C /* LetterGothicStd-BoldSlanted.otf in Resources */,
+				DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */,
 				DA5953D92313216A006BE93C /* LetterGothicStd.otf in Resources */,
 				DA462BB32306C149005212BE /* Main.storyboard in Resources */,
 			);
@@ -314,7 +315,6 @@
 				DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */,
 				DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */,
 				DA462BB02306C149005212BE /* ViewController.swift in Sources */,
-				DA0F6D13230AE004003BC924 /* ImageViewController.swift in Sources */,
 				DA6E62AF23129937004A5B76 /* Button.swift in Sources */,
 				DAFE89DE23BAA3930033B8C3 /* ActivityIndicatorView.swift in Sources */,
 				DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */,
@@ -470,7 +470,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Support/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -490,7 +490,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Support/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

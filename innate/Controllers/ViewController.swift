@@ -13,7 +13,6 @@ final class ViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
     @IBOutlet private weak var activityIndicator: ActivityIndicatorView!
-    @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var buttonsContainerView: UIView!
     @IBOutlet weak var cameraButton: Button!
     @IBOutlet weak var libraryButton: Button!
@@ -46,15 +45,15 @@ final class ViewController: UIViewController {
     }
     
     private func setupScrollView() {
-        automaticallyAdjustsScrollViewInsets = false
+        //automaticallyAdjustsScrollViewInsets = false
         
         //setup main view container
         view.addSubview(container)
-        view.sendSubviewToBack(container)
+        view.sendSubviewToBack(container) 
         container.pinTopBottom(toParentView: view, withPadding: 0)
         container.pinRight(toParentView: view, withPadding: 0)
         containerLeftConstraint = NSLayoutConstraint(item: container, attribute: .left, relatedBy: .equal,
-                                                     toItem: view, attribute: .left, multiplier: 1.0, constant: 0)
+                                                     toItem: view.safeAreaLayoutGuide, attribute: .left, multiplier: 1.0, constant: 0)
         view.addConstraint(containerLeftConstraint)
         
         //setup scrollview container
@@ -71,6 +70,8 @@ final class ViewController: UIViewController {
         scrollView.equalHeight(toParentView: scrollViewContainer)
         scrollView.alignCenterX(toParentView: scrollViewContainer)
         toggleScrollViewLandscapeConstraint(isLandscape: true)
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.layer.masksToBounds = false
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
@@ -179,7 +180,7 @@ final class ViewController: UIViewController {
             pageControl.maxDots = 7
             pageControl.centerDots = 3
         }
-        pageControl.pages = (amount + 1)
+        pageControl.pages = amount
     }
     
     private func resetImageStackView() {
@@ -229,10 +230,12 @@ extension ViewController: PhotoManagerDelegate {
                     let result = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
                     result.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
                         result.removeFromSuperview()
+                        self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
                     })
                 }
             }, andFailureHandler: {
                 firstResult.removeFromSuperview()
+                self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
             })
         }, andFailureHandler: {
         error in

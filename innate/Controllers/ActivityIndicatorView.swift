@@ -10,7 +10,7 @@ import UIKit
 class ActivityIndicatorView: UILabel {
     
     private var timer = Timer()
-    private let loadingIcons = ["⍅","⍭","⍊","⌿","⍚","⍙"]
+    private let loadingIcons = ["-"]
     private let characterCap = 4
     
     init() {
@@ -28,7 +28,7 @@ class ActivityIndicatorView: UILabel {
     }
     
     private func setup() {
-        font = .systemFont(ofSize: 28)
+        font = .systemFont(ofSize: 30)
         textColor = .white
         text = ""
     }

@@ -142,16 +142,6 @@ class ImageResultView: UIView {
             failureHandler?()
         })
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        print("zozoozozoozozozooz")
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        print("jdlflfdkjldkfj")
-    }
 }
 
 extension ImageResultView : UIScrollViewDelegate {
@@ -163,25 +153,6 @@ extension ImageResultView : UIScrollViewDelegate {
 
 class ImageView : UIImageView {
     
-    private func setup() {
-//        layer.borderColor = UIColor.white.cgColor
-//        layer.borderWidth = 1
-    }
-    
-    init() {
-        super.init(image: nil)
-        setup()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
 }
 
 class AlertController : UIAlertController {

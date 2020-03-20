@@ -35,6 +35,10 @@
 	<string>We need to access the library so the user can choose a photo to search for results</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>IBMPlexMono-Bold.otf</string>
+		<string>IBMPlexMono-Medium.otf</string>
+		<string>IBMPlexMono-SemiBold.otf</string>
+		<string>IBMPlexSans-Bold.otf</string>
 		<string>bayer.ttf</string>
 		<string>ManifontGroteskBookItalic.ttf</string>
 		<string>Roboto-Bold.ttf</string>

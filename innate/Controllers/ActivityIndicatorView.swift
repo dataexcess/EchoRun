@@ -10,7 +10,7 @@ import UIKit
 class ActivityIndicatorView: UILabel {
     
     private var timer = Timer()
-    private let loadingIcons = ["-"]
+    private let loadingIcons = ["●"]
     private let characterCap = 4
     
     init() {
@@ -25,22 +25,25 @@ class ActivityIndicatorView: UILabel {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setup()
     }
     
     private func setup() {
-        font = .systemFont(ofSize: 30)
+        //font = .systemFont(ofSize: 14)
         textColor = .white
         text = ""
+        self.addCharacterSpacing(kernValue: 1.6)
     }
     
     func start() {
         var step = 0
         timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {
-            
             timer in
-            self.text! += self.loadingIcons.randomElement()!
-            if (step % self.characterCap == 0) { self.text = "" }
+            
+            self.attributedText = NSAttributedString(string: self.attributedText!.string + self.loadingIcons.randomElement()!)
+            if (step % self.characterCap == 0) { self.attributedText = NSAttributedString(string: "") }
             step += 1
+            self.addCharacterSpacing(kernValue: 1.6)
         }
     }
     

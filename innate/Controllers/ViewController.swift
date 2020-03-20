@@ -18,6 +18,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var libraryButton: Button!
     @IBOutlet weak var addNewButton: UIButton!
     @IBOutlet weak var inputCancelAreView: UIView!
+    @IBOutlet weak var introText: UILabel!
     private var container:UIView = { let view = UIView(); view.backgroundColor = .black; return view }()
     private var scrollViewContainer:UnclippedView!
     private var scrollView:UnclippedScrollView!
@@ -41,7 +42,7 @@ final class ViewController: UIViewController {
         cameraButton.delegate = self
         libraryButton.type = .Library
         libraryButton.delegate = self
-        addNewButton.isHidden = true
+        buttonsContainerView.isHidden = true
     }
     
     private func setupScrollView() {
@@ -130,7 +131,7 @@ final class ViewController: UIViewController {
         view.addSubview(pageControl)
         view.bringSubviewToFront(pageControl)
         pageControl.alignCenterX(toParentView: view)
-        pageControl.alignCenterY(toParentView: view, withOffset: Int( (UIScreen.main.bounds.width / 2) + 14 ))
+        pageControl.pinTop(toParentView: view, withPadding: 25)
         pageControl.isHidden = true
         pageControl.dotColor = UIColor.darkGray
         pageControl.selectedColor = UIColor.white
@@ -160,6 +161,7 @@ final class ViewController: UIViewController {
         buttonsContainerView.isHidden = false
         addNewButton.isHidden = true
         pageControl.isHidden = true
+        introText.isHidden = true
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -24,6 +24,10 @@
 		DA5953D723132165006BE93C /* LetterGothicStd-BoldSlanted.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5953D52313215D006BE93C /* LetterGothicStd-BoldSlanted.otf */; };
 		DA5953D823132167006BE93C /* LetterGothicStd-Slanted.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5953D32313215D006BE93C /* LetterGothicStd-Slanted.otf */; };
 		DA5953D92313216A006BE93C /* LetterGothicStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5953D42313215D006BE93C /* LetterGothicStd.otf */; };
+		DA5F5CED2424C5B000F254DC /* IBMPlexMono-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5F5CEC2424C5AC00F254DC /* IBMPlexMono-Bold.otf */; };
+		DA5F5CEE2424C5B000F254DC /* IBMPlexMono-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5F5CEA2424C5AB00F254DC /* IBMPlexMono-Medium.otf */; };
+		DA5F5CEF2424C5B000F254DC /* IBMPlexMono-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5F5CEB2424C5AC00F254DC /* IBMPlexMono-SemiBold.otf */; };
+		DA5F5CF02424C5B000F254DC /* IBMPlexSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA5F5CE92424C5AB00F254DC /* IBMPlexSans-Bold.otf */; };
 		DA6E62AF23129937004A5B76 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E62AE23129937004A5B76 /* Button.swift */; };
 		DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE42306CC2400CE482F /* PhotoManager.swift */; };
 		DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE62306CC3300CE482F /* NetworkManager.swift */; };
@@ -53,6 +57,10 @@
 		DA5953D32313215D006BE93C /* LetterGothicStd-Slanted.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LetterGothicStd-Slanted.otf"; sourceTree = "<group>"; };
 		DA5953D42313215D006BE93C /* LetterGothicStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LetterGothicStd.otf; sourceTree = "<group>"; };
 		DA5953D52313215D006BE93C /* LetterGothicStd-BoldSlanted.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LetterGothicStd-BoldSlanted.otf"; sourceTree = "<group>"; };
+		DA5F5CE92424C5AB00F254DC /* IBMPlexSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Bold.otf"; sourceTree = "<group>"; };
+		DA5F5CEA2424C5AB00F254DC /* IBMPlexMono-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexMono-Medium.otf"; sourceTree = "<group>"; };
+		DA5F5CEB2424C5AC00F254DC /* IBMPlexMono-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexMono-SemiBold.otf"; sourceTree = "<group>"; };
+		DA5F5CEC2424C5AC00F254DC /* IBMPlexMono-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexMono-Bold.otf"; sourceTree = "<group>"; };
 		DA6E62AE23129937004A5B76 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		DA806AE42306CC2400CE482F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		DA806AE62306CC3300CE482F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -123,6 +131,10 @@
 		DA5953CD2313202A006BE93C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				DA5F5CEC2424C5AC00F254DC /* IBMPlexMono-Bold.otf */,
+				DA5F5CEA2424C5AB00F254DC /* IBMPlexMono-Medium.otf */,
+				DA5F5CEB2424C5AC00F254DC /* IBMPlexMono-SemiBold.otf */,
+				DA5F5CE92424C5AB00F254DC /* IBMPlexSans-Bold.otf */,
 				DA5953CE2313203E006BE93C /* ManifontGroteskBookItalic.ttf */,
 				DA423E2D2417C387007BDEC2 /* bayer.ttf */,
 				DA5953D023132047006BE93C /* ManifontGroteskBook.ttf */,
@@ -252,14 +264,18 @@
 				DA44B1192365F64C00FEDB44 /* Roboto-Regular.ttf in Resources */,
 				DA5953D123132047006BE93C /* ManifontGroteskBook.ttf in Resources */,
 				DA462BB82306C14A005212BE /* LaunchScreen.storyboard in Resources */,
+				DA5F5CEF2424C5B000F254DC /* IBMPlexMono-SemiBold.otf in Resources */,
+				DA5F5CEE2424C5B000F254DC /* IBMPlexMono-Medium.otf in Resources */,
 				DA5953CF2313203E006BE93C /* ManifontGroteskBookItalic.ttf in Resources */,
 				DA5953D823132167006BE93C /* LetterGothicStd-Slanted.otf in Resources */,
+				DA5F5CF02424C5B000F254DC /* IBMPlexSans-Bold.otf in Resources */,
 				DA462BB52306C14A005212BE /* Assets.xcassets in Resources */,
 				DA5953D623132162006BE93C /* LetterGothicStd-Bold.otf in Resources */,
 				DA5953D723132165006BE93C /* LetterGothicStd-BoldSlanted.otf in Resources */,
 				DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */,
 				DA5953D92313216A006BE93C /* LetterGothicStd.otf in Resources */,
 				DA462BB32306C149005212BE /* Main.storyboard in Resources */,
+				DA5F5CED2424C5B000F254DC /* IBMPlexMono-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

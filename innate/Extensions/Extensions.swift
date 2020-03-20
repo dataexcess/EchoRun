@@ -47,6 +47,13 @@ extension UIView {
         superView.addConstraint(right)
     }
     
+    func pinTop(toParentView superView:UIView, withPadding padding:Int) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal,
+                                       toItem: superView.safeAreaLayoutGuide, attribute: .top, multiplier: 1.0, constant: CGFloat(padding))
+        superView.addConstraint(top)
+    }
+    
     func pinTopBottom(toParentView superView:UIView, withPadding padding:Int) {
         self.translatesAutoresizingMaskIntoConstraints = false
         let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal,
@@ -122,6 +129,16 @@ extension UIView {
                                           toItem: superView, attribute: .centerY, multiplier: 1.0, constant: CGFloat(offset))
          superView.addConstraints([centerY])
     }
+}
+
+extension UILabel {
+  func addCharacterSpacing(kernValue: Double = 1.15) {
+    if let labelText = text, labelText.count > 0 {
+      let attributedString = NSMutableAttributedString(string: labelText)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))
+      attributedText = attributedString
+    }
+  }
 }
 
 extension String {

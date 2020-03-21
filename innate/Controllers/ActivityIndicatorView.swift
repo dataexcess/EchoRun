@@ -29,10 +29,10 @@ class ActivityIndicatorView: UILabel {
     }
     
     private func setup() {
-        //font = .systemFont(ofSize: 14)
+        font = .systemFont(ofSize: 7)
         textColor = .white
         text = ""
-        self.addCharacterSpacing(kernValue: 1.6)
+        self.addCharacterSpacing(kernValue: 2.0)
     }
     
     func start() {
@@ -43,7 +43,7 @@ class ActivityIndicatorView: UILabel {
             self.attributedText = NSAttributedString(string: self.attributedText!.string + self.loadingIcons.randomElement()!)
             if (step % self.characterCap == 0) { self.attributedText = NSAttributedString(string: "") }
             step += 1
-            self.addCharacterSpacing(kernValue: 1.6)
+            self.addCharacterSpacing(kernValue: 2.0)
         }
     }
     

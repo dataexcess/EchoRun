@@ -35,6 +35,7 @@ final class ViewController: UIViewController {
         setupScrollView()
         setupImagesStackView()
         setupPageControl()
+        activityIndicator.text = ""
     }
     
     private func setupButtons() {
@@ -131,7 +132,7 @@ final class ViewController: UIViewController {
         view.addSubview(pageControl)
         view.bringSubviewToFront(pageControl)
         pageControl.alignCenterX(toParentView: view)
-        pageControl.pinTop(toParentView: view, withPadding: 25)
+        pageControl.pinTop(toParentView: view, withPadding: 21)
         pageControl.isHidden = true
         pageControl.dotColor = UIColor.darkGray
         pageControl.selectedColor = UIColor.white
@@ -143,7 +144,6 @@ final class ViewController: UIViewController {
     
     @objc func didTapCancelArea() {
         buttonsContainerView.isHidden = true
-        addNewButton.isHidden = false
         pageControl.isHidden = false
     }
     
@@ -158,10 +158,32 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didPressNewButton(_ sender: Any) {
-        buttonsContainerView.isHidden = false
-        addNewButton.isHidden = true
-        pageControl.isHidden = true
+        //buttonsContainerView.isHidden = false
+        //pageControl.isHidden = true
         introText.isHidden = true
+        
+        //Create the AlertController and add Its action like button in Actionsheet
+        let actionSheetController: UIAlertController = UIAlertController(title: "", message: "input source:", preferredStyle: .actionSheet)
+
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .cancel) {
+            _ in
+            print("Cancel")
+        }
+        actionSheetController.addAction(cancelActionButton)
+
+        let saveActionButton = UIAlertAction(title: "Camera", style: .default) {
+            _ in
+            self.didPressCameraButton(self)
+        }
+        actionSheetController.addAction(saveActionButton)
+
+        let deleteActionButton = UIAlertAction(title: "Library", style: .default) {
+            _ in
+            self.didPressLibraryButton(self)
+        }
+        actionSheetController.addAction(deleteActionButton)
+        
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -213,7 +235,7 @@ extension ViewController: PhotoManagerDelegate {
     
     func didSucceedInFetchingImage(cameraImage: UIImage) {
         buttonsContainerView.isHidden = true
-        addNewButton.isHidden = false
+        activityIndicator.stop()
         activityIndicator.start()
         (imagesStackView.arrangedSubviews.first as! ImageResultView).imageView.image = cameraImage
         NetworkManager.sharedInstance.findVisuallySimilarImagesFor(image: cameraImage, withCompletionHandler: {

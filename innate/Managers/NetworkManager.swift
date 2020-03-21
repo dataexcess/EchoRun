@@ -18,7 +18,7 @@ let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
 let kMultipartFormDataMimeTypeKey = "image/jpg"
 let kHeaderAcceptLanguage = "en-US,en-GB,en;q=1.0"
-let kHeaderUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+let kHeaderUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
 let kBaseURL = "https://www.google.com"
 
 enum NetworkingError: Error, LocalizedError {
@@ -31,15 +31,15 @@ enum NetworkingError: Error, LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .uploadError:
-            return NSLocalizedString("⌿ upload error ⍀", comment: "")
+            return NSLocalizedString("upload error", comment: "")
         case .parsingError:
-            return NSLocalizedString("⌿ parsing error ⍀", comment: "")
+            return NSLocalizedString("parsing error", comment: "")
         case .dataError:
-            return NSLocalizedString("⌿ data error ⍀", comment: "")
+            return NSLocalizedString("data error", comment: "")
         case .connectionError:
-            return NSLocalizedString("⌿ connection error ⍀", comment: "")
+            return NSLocalizedString("connection error", comment: "")
         case .notFound:
-            return NSLocalizedString("⌿ not found ⍀", comment: "")
+            return NSLocalizedString("not found", comment: "")
         }
     }
 }
@@ -55,6 +55,7 @@ final class NetworkManager: NSObject {
     func findVisuallySimilarImagesFor(image:UIImage,
                                       withCompletionHandler completionHandler:@escaping (_:[URL])->(),
                                       andFailureHandler failurehandler:@escaping (_:NetworkingError)->()) {
+        clearCookies()
         upload(image: image) {
             response in
             guard let uploadResultURL = self.getImageSearchUploadResultURL(forResponse: response) else {
@@ -82,7 +83,7 @@ final class NetworkManager: NSObject {
         guard let location = transactionMetrics.allHeaderFields["Location"] else { return nil }
         guard let locationString = location as? String else { return nil }
         guard let URL = URL(string: locationString) else { return nil }
-        
+
         return URL
     }
     
@@ -169,6 +170,15 @@ final class NetworkManager: NSObject {
         } catch let error as NSError {
             print("invalid regex: \(error.localizedDescription)")
             return []
+        }
+    }
+    
+    func clearCookies() {
+        let cstorage = HTTPCookieStorage.shared
+        if let cookies = cstorage.cookies(for: URL(string: kBaseURL)!) {
+            for cookie in cookies {
+                cstorage.deleteCookie(cookie)
+            }
         }
     }
 }

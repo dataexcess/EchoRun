@@ -18,6 +18,7 @@ let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
 let kMultipartFormDataMimeTypeKey = "image/jpg"
 let kHeaderAcceptLanguage = "en-US,en-GB,en;q=1.0"
+let kHeaderContentType = "image"
 let kHeaderUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
 let kBaseURL = "https://www.google.com"
 
@@ -49,7 +50,8 @@ final class NetworkManager: NSObject {
     public static let sharedInstance = NetworkManager()
     private let headers: HTTPHeaders = [
         "Accept-Language": kHeaderAcceptLanguage,
-        "User-Agent": kHeaderUserAgent
+        "User-Agent": kHeaderUserAgent,
+        //"Content-Type": kHeaderContentType,
     ]
     
     func findVisuallySimilarImagesFor(image:UIImage,
@@ -156,7 +158,10 @@ final class NetworkManager: NSObject {
         Alamofire.request(imageURL).responseImage {
             
             response in
-            guard let image = response.result.value else { failureHandler(.dataError); return }
+            guard let image = response.result.value else {
+                failureHandler(.dataError);
+                return
+            }
             completionHandler(image)
         }
     }

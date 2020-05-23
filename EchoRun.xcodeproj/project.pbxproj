@@ -31,6 +31,8 @@
 		DA6E62AF23129937004A5B76 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E62AE23129937004A5B76 /* Button.swift */; };
 		DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE42306CC2400CE482F /* PhotoManager.swift */; };
 		DA806AE72306CC3300CE482F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA806AE62306CC3300CE482F /* NetworkManager.swift */; };
+		DA90D683243C72BD00985160 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90D682243C72BD00985160 /* RatingManager.swift */; };
+		DAB76EE0243B8F2900367890 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB76EDF243B8F2900367890 /* GoogleService-Info.plist */; };
 		DAECFF5023BB466D00594601 /* ImageResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF4F23BB466D00594601 /* ImageResultView.swift */; };
 		DAECFF5223BB581000594601 /* UnclippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFF5123BB581000594601 /* UnclippedView.swift */; };
 		DAFE89DE23BAA3930033B8C3 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */; };
@@ -44,7 +46,7 @@
 		DA44B1142365F60A00FEDB44 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		DA44B1162365F60B00FEDB44 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		DA462BAA2306C149005212BE /* Succession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Succession.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA462BAA2306C149005212BE /* Echo Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Echo Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA462BAD2306C149005212BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA462BAF2306C149005212BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DA462BB22306C149005212BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,6 +66,8 @@
 		DA6E62AE23129937004A5B76 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		DA806AE42306CC2400CE482F /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		DA806AE62306CC3300CE482F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DA90D682243C72BD00985160 /* RatingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
+		DAB76EDF243B8F2900367890 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAECFF4F23BB466D00594601 /* ImageResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultView.swift; sourceTree = "<group>"; };
 		DAECFF5123BB581000594601 /* UnclippedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclippedView.swift; sourceTree = "<group>"; };
 		DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
@@ -111,7 +115,7 @@
 		DA462BAB2306C149005212BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA462BAA2306C149005212BE /* Succession.app */,
+				DA462BAA2306C149005212BE /* Echo Run.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +123,7 @@
 		DA462BAC2306C149005212BE /* innate */ = {
 			isa = PBXGroup;
 			children = (
+				DAB76EDF243B8F2900367890 /* GoogleService-Info.plist */,
 				DA6E62AD23129922004A5B76 /* Views */,
 				DA0F6D0D230ADB34003BC924 /* Extensions */,
 				DA806AE32306C2BC00CE482F /* Managers */,
@@ -173,6 +178,7 @@
 			children = (
 				DA806AE42306CC2400CE482F /* PhotoManager.swift */,
 				DA806AE62306CC3300CE482F /* NetworkManager.swift */,
+				DA90D682243C72BD00985160 /* RatingManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -211,6 +217,7 @@
 				DA462BA72306C149005212BE /* Frameworks */,
 				DA462BA82306C149005212BE /* Resources */,
 				CB7785FF3CA0559BE0836898 /* [CP] Embed Pods Frameworks */,
+				DAB76EE1243B933000367890 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -218,7 +225,7 @@
 			);
 			name = innate;
 			productName = innate;
-			productReference = DA462BAA2306C149005212BE /* Succession.app */;
+			productReference = DA462BAA2306C149005212BE /* Echo Run.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -270,6 +277,7 @@
 				DA5953D823132167006BE93C /* LetterGothicStd-Slanted.otf in Resources */,
 				DA5F5CF02424C5B000F254DC /* IBMPlexSans-Bold.otf in Resources */,
 				DA462BB52306C14A005212BE /* Assets.xcassets in Resources */,
+				DAB76EE0243B8F2900367890 /* GoogleService-Info.plist in Resources */,
 				DA5953D623132162006BE93C /* LetterGothicStd-Bold.otf in Resources */,
 				DA5953D723132165006BE93C /* LetterGothicStd-BoldSlanted.otf in Resources */,
 				DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */,
@@ -321,6 +329,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-innate/Pods-innate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DAB76EE1243B933000367890 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -336,6 +362,7 @@
 				DA806AE52306CC2400CE482F /* PhotoManager.swift in Sources */,
 				DA462BAE2306C149005212BE /* AppDelegate.swift in Sources */,
 				DAECFF5023BB466D00594601 /* ImageResultView.swift in Sources */,
+				DA90D683243C72BD00985160 /* RatingManager.swift in Sources */,
 				DAECFF5223BB581000594601 /* UnclippedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,7 +510,9 @@
 			baseConfigurationReference = CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -491,8 +520,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataexcess.innate;
-				PRODUCT_NAME = Succession;
+				PRODUCT_NAME = "Echo Run";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -503,7 +534,9 @@
 			baseConfigurationReference = E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Joeri Bultheel (46T89JUTZ3)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = innate/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -511,8 +544,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataexcess.innate;
-				PRODUCT_NAME = Succession;
+				PRODUCT_NAME = "Echo Run";
+				PROVISIONING_PROFILE_SPECIFIER = "succession profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

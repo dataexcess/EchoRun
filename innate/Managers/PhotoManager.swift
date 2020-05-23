@@ -37,7 +37,8 @@ class PhotoManager: NSObject {
     }
     
     func save(image: UIImage) {
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(photoSavingCallback(presentingInViewController:withError:contextInfo:)), nil)
+        let croppedSquareImage = image.crop(rect: CGRect(origin: .zero, size: image.size).centerSquareRect())
+        UIImageWriteToSavedPhotosAlbum(croppedSquareImage, self, #selector(photoSavingCallback(presentingInViewController:withError:contextInfo:)), nil)
     }
     
     @objc func photoSavingCallback(presentingInViewController viewController:UIViewController, withError error: Error?, contextInfo: UnsafeRawPointer) {

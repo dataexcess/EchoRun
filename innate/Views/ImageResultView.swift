@@ -101,18 +101,14 @@ class ImageResultView: UIView {
     
     func presentSavingDialog(withImage image: UIImage) {
         let alert = AlertController(title: "Save Image", message: "", preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
-            
             action in
             PhotoManager.sharedInstance.save(image: image)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {
-            
             action in
             alert.dismiss(animated: true, completion: nil)
         }))
-        
         if !UIApplication.topViewController()!.isKind(of: AlertController.self) {
             UIApplication.topViewController()!.present(alert, animated: true, completion: nil)
         }
@@ -125,7 +121,7 @@ class ImageResultView: UIView {
     
     func loadImage(forURL url: URL,
                    withCompletionHandler completionHandler: (()->Void)?,
-                   andFailureHandler failureHandler: (()->Void)?) {
+                   andFailureHandler failureHandler:((_:NetworkingError)->())?) {
         activityIndicator.start()
         NetworkManager.sharedInstance.download(imageURL: url, withCompletionHandler: {
             
@@ -139,7 +135,7 @@ class ImageResultView: UIView {
             debugPrint(error)
             self.activityIndicator.stop()
             self.activityIndicator.text = error.localizedDescription
-            failureHandler?()
+            failureHandler?(error)
         })
     }
 }

@@ -158,31 +158,24 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didPressNewButton(_ sender: Any) {
-        //buttonsContainerView.isHidden = false
-        //pageControl.isHidden = true
         introText.isHidden = true
         
-        //Create the AlertController and add Its action like button in Actionsheet
         let actionSheetController: UIAlertController = UIAlertController(title: "", message: "input source:", preferredStyle: .actionSheet)
-
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .cancel) {
             _ in
             print("Cancel")
         }
         actionSheetController.addAction(cancelActionButton)
-
         let saveActionButton = UIAlertAction(title: "Camera", style: .default) {
             _ in
             self.didPressCameraButton(self)
         }
         actionSheetController.addAction(saveActionButton)
-
         let deleteActionButton = UIAlertAction(title: "Library", style: .default) {
             _ in
             self.didPressLibraryButton(self)
         }
         actionSheetController.addAction(deleteActionButton)
-        
         self.present(actionSheetController, animated: true, completion: nil)
     }
     
@@ -240,27 +233,7 @@ extension ViewController: PhotoManagerDelegate {
         (imagesStackView.arrangedSubviews.first as! ImageResultView).imageView.image = cameraImage
         NetworkManager.sharedInstance.findVisuallySimilarImagesFor(image: cameraImage, withCompletionHandler: {
         imageURLS in
-            guard let firstImageURL = imageURLS.first else { return }
-            for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
-            let firstResult = (self.imagesStackView.arrangedSubviews[1] as! ImageResultView)
-            firstResult.loadImage(forURL: firstImageURL, withCompletionHandler: {
-                self.scrollView.scrollToPage(withIndex: 1, animated: true)
-                self.setupPageControlPages(forAmount: imageURLS.count)
-                self.pageControl.isHidden = false
-                self.activityIndicator.stop()
-                guard imageURLS.count > 1 else { return }
-                let remainingURLs = Array(imageURLS.dropFirst())
-                for (idx, url) in remainingURLs.enumerated() {
-                    let result = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
-                    result.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
-                        result.removeFromSuperview()
-                        self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
-                    })
-                }
-            }, andFailureHandler: {
-                firstResult.removeFromSuperview()
-                self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
-            })
+            self.tryToLoadFirstImageAndAfterwardsTheRemainingImages(forURLS: imageURLS)
         }, andFailureHandler: {
         error in
             self.activityIndicator.stop()
@@ -268,10 +241,49 @@ extension ViewController: PhotoManagerDelegate {
         })
     }
     
+    func tryToLoadFirstImageAndAfterwardsTheRemainingImages(forURLS imageURLS:[URL]) {
+        guard let firstImageURL = imageURLS.first else { return }
+        for _ in 0..<imageURLS.count { self.imagesStackView.addArrangedSubview(ImageResultView()) }
+        let firstResult = (self.imagesStackView.arrangedSubviews[1] as! ImageResultView)
+        firstResult.loadImage(forURL: firstImageURL, withCompletionHandler: {
+            self.scrollView.scrollToPage(withIndex: 1, animated: true)
+            self.setupPageControlPages(forAmount: imageURLS.count)
+            self.pageControl.isHidden = false
+            self.activityIndicator.stop()
+            guard imageURLS.count > 1 else { return }
+            let remainingURLs = Array(imageURLS.dropFirst())
+            
+            RatingManager.sharedInstance.incrementSearchCount()
+            RatingManager.sharedInstance.checkAndAskForReview()
+            
+            for (idx, url) in remainingURLs.enumerated() {
+                let result = (self.imagesStackView.arrangedSubviews[idx+2] as! ImageResultView)
+                result.loadImage(forURL: url, withCompletionHandler: nil, andFailureHandler: {
+                    error in
+
+                    result.removeFromSuperview()
+                    self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
+                })
+            }
+        }, andFailureHandler: {
+            error in
+            self.imagesStackView.arrangedSubviews[1..<self.imagesStackView.arrangedSubviews.count].forEach { $0.removeFromSuperview() }
+            self.setupPageControlPages(forAmount: self.imagesStackView.arrangedSubviews.count)
+            
+            let remainingURLs = Array(imageURLS.dropFirst())
+            if !remainingURLs.isEmpty {
+                self.tryToLoadFirstImageAndAfterwardsTheRemainingImages(forURLS: Array(imageURLS.dropFirst()))
+            } else {
+                self.activityIndicator.stop()
+                self.activityIndicator.text = error.localizedDescription
+            }
+        })
+    }
+    
     func didSucceedInSavingPhoto() {
         let ac = UIAlertController(title: "Saved!", message: "", preferredStyle: .alert)
         self.present(ac, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(20), execute: {
             ac.dismiss(animated: true, completion: nil)
         })
     }
@@ -279,7 +291,7 @@ extension ViewController: PhotoManagerDelegate {
     func didFailInSavingPhoto(_: Error) {
         let ac = UIAlertController(title: "Error", message: "Image could not be saved", preferredStyle: .alert)
         self.present(ac, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(20), execute: {
             ac.dismiss(animated: true, completion: nil)
         })
     }

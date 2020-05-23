@@ -190,3 +190,35 @@ extension UIScrollView {
         set { }
     }
 }
+
+extension CGRect {
+    func centerSquareRect() -> CGRect {
+        if height > width {
+            return CGRect(origin: CGPoint(x: 0,
+                                          y: (height - width) / 2),
+                          size: CGSize(width: width,
+                                       height: width))
+        } else {
+            return CGRect(origin: CGPoint(x: (width - height) / 2,
+                                          y: 0),
+                          size: CGSize(width: height,
+                                       height: height))
+        }
+    }
+}
+
+extension UIImage {
+
+    func crop( rect: CGRect) -> UIImage {
+        var rect = rect
+        rect.origin.x *= scale
+        rect.origin.y *= scale
+        rect.size.width *= scale
+        rect.size.height *= scale
+        let imageRef = cgImage!.cropping(to: rect)
+        let image = UIImage(cgImage: imageRef!,
+                            scale: scale,
+                            orientation: imageOrientation)
+        return image
+    }
+}

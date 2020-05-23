@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5CDA0D493F1DA3E7BB1B61F6 /* Pods_innate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B69C7B773029D6F56163145 /* Pods_innate.framework */; };
+		2C81286565DB22D687938F3B /* Pods_EchoRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */; };
 		DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D0E230ADB50003BC924 /* Extensions.swift */; };
 		DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA423E2D2417C387007BDEC2 /* bayer.ttf */; };
 		DA44B1172365F64C00FEDB44 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */; };
@@ -39,7 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B69C7B773029D6F56163145 /* Pods_innate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_innate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EchoRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5BD845438E4A47430D1ECF0 /* Pods-EchoRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EchoRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-EchoRun/Pods-EchoRun.release.xcconfig"; sourceTree = "<group>"; };
 		CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.debug.xcconfig"; sourceTree = "<group>"; };
 		DA0F6D0E230ADB50003BC924 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DA423E2D2417C387007BDEC2 /* bayer.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bayer.ttf; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		DAECFF4F23BB466D00594601 /* ImageResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultView.swift; sourceTree = "<group>"; };
 		DAECFF5123BB581000594601 /* UnclippedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclippedView.swift; sourceTree = "<group>"; };
 		DAFE89DD23BAA3930033B8C3 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		DD00CC9FDD93F0B461A2848B /* Pods-EchoRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EchoRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EchoRun/Pods-EchoRun.debug.xcconfig"; sourceTree = "<group>"; };
 		E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.release.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CDA0D493F1DA3E7BB1B61F6 /* Pods_innate.framework in Frameworks */,
+				2C81286565DB22D687938F3B /* Pods_EchoRun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +91,7 @@
 		4B82459338905610FD68072A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2B69C7B773029D6F56163145 /* Pods_innate.framework */,
+				5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,7 +107,7 @@
 		DA462BA12306C149005212BE = {
 			isa = PBXGroup;
 			children = (
-				DA462BAC2306C149005212BE /* innate */,
+				DA462BAC2306C149005212BE /* EchoRun */,
 				DA462BAB2306C149005212BE /* Products */,
 				F40B34FD670E663EC7D11DCA /* Pods */,
 				4B82459338905610FD68072A /* Frameworks */,
@@ -120,7 +122,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DA462BAC2306C149005212BE /* innate */ = {
+		DA462BAC2306C149005212BE /* EchoRun */ = {
 			isa = PBXGroup;
 			children = (
 				DAB76EDF243B8F2900367890 /* GoogleService-Info.plist */,
@@ -130,7 +132,7 @@
 				DA806AE22306C2B000CE482F /* Controllers */,
 				DAFE89DC23BAA3060033B8C3 /* Support */,
 			);
-			path = innate;
+			path = EchoRun;
 			sourceTree = "<group>";
 		};
 		DA5953CD2313202A006BE93C /* Fonts */ = {
@@ -201,6 +203,8 @@
 			children = (
 				CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */,
 				E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */,
+				DD00CC9FDD93F0B461A2848B /* Pods-EchoRun.debug.xcconfig */,
+				A5BD845438E4A47430D1ECF0 /* Pods-EchoRun.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -208,9 +212,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA462BA92306C149005212BE /* innate */ = {
+		DA462BA92306C149005212BE /* EchoRun */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA462BBC2306C14A005212BE /* Build configuration list for PBXNativeTarget "innate" */;
+			buildConfigurationList = DA462BBC2306C14A005212BE /* Build configuration list for PBXNativeTarget "EchoRun" */;
 			buildPhases = (
 				04EB31FF92380375D92EA96F /* [CP] Check Pods Manifest.lock */,
 				DA462BA62306C149005212BE /* Sources */,
@@ -223,7 +227,7 @@
 			);
 			dependencies = (
 			);
-			name = innate;
+			name = EchoRun;
 			productName = innate;
 			productReference = DA462BAA2306C149005212BE /* Echo Run.app */;
 			productType = "com.apple.product-type.application";
@@ -243,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DA462BA52306C149005212BE /* Build configuration list for PBXProject "innate" */;
+			buildConfigurationList = DA462BA52306C149005212BE /* Build configuration list for PBXProject "EchoRun" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -256,7 +260,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA462BA92306C149005212BE /* innate */,
+				DA462BA92306C149005212BE /* EchoRun */,
 			);
 		};
 /* End PBXProject section */
@@ -305,7 +309,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-innate-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EchoRun-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -318,15 +322,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-innate/Pods-innate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EchoRun/Pods-EchoRun-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-innate/Pods-innate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EchoRun/Pods-EchoRun-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-innate/Pods-innate-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EchoRun/Pods-EchoRun-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAB76EE1243B933000367890 /* ShellScript */ = {
@@ -507,14 +511,14 @@
 		};
 		DA462BBD2306C14A005212BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */;
+			baseConfigurationReference = DD00CC9FDD93F0B461A2848B /* Pods-EchoRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
-				INFOPLIST_FILE = innate/Support/Info.plist;
+				INFOPLIST_FILE = EchoRun/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,14 +535,14 @@
 		};
 		DA462BBE2306C14A005212BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E99246E6A8EBF621815C7D01 /* Pods-innate.release.xcconfig */;
+			baseConfigurationReference = A5BD845438E4A47430D1ECF0 /* Pods-EchoRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Joeri Bultheel (46T89JUTZ3)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
-				INFOPLIST_FILE = innate/Support/Info.plist;
+				INFOPLIST_FILE = EchoRun/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -556,7 +560,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA462BA52306C149005212BE /* Build configuration list for PBXProject "innate" */ = {
+		DA462BA52306C149005212BE /* Build configuration list for PBXProject "EchoRun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA462BBA2306C14A005212BE /* Debug */,
@@ -565,7 +569,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA462BBC2306C14A005212BE /* Build configuration list for PBXNativeTarget "innate" */ = {
+		DA462BBC2306C14A005212BE /* Build configuration list for PBXNativeTarget "EchoRun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA462BBD2306C14A005212BE /* Debug */,

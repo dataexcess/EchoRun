@@ -1,13 +1,13 @@
 platform :ios, '10.0'
 
-target 'innate' do
+target 'EchoRun' do
 
   use_frameworks!
 
   # Pods for innate
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.9.1'
   pod 'AlamofireImage'
   pod 'CrossroadRegex'
   pod 'ScrollingPageControl'

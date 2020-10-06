@@ -12,7 +12,8 @@ import AlamofireImage
 import Regex
 
 let kGoogleImageSearchURL = "https://www.google.com/searchbyimage/upload"
-let kRegexVisuallySimilarLink = "href=((?:(?!href).)*?)>Visually similar"
+let kRegexVisuallySimilarLink_1 = "href=((?:(?!href).)*?)>Images for" //changed from 'Visually Similar' to 'Images for' on 06-10-2020
+let kRegexVisuallySimilarLink_2 = "^(.*?)>" //unfortunately I don't know how to chain together these 2 regex rules T_T
 let kRegexVisuallySimilarImageURLs = "(http[^\\s]+(jpg|jpeg|png|tiff)\\b)"
 let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
@@ -90,8 +91,9 @@ final class NetworkManager: NSObject {
     }
     
     func getVisuallySimilarButtonLinkURL(inResponse response:String) -> URL? {
-        guard var regexResult = kRegexVisuallySimilarLink.r?.findFirst(in: response)?.group(at: 1) else { return nil }
-        guard var URLString = (kBaseURL + regexResult.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
+        guard let regexResult = kRegexVisuallySimilarLink_1.r?.findFirst(in: response)?.group(at: 1) else { return nil }
+        guard var regexResult2 = kRegexVisuallySimilarLink_2.r?.findFirst(in: regexResult)?.group(at: 1) else { return nil }
+        guard var URLString = (kBaseURL + regexResult2.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
         if URLString.last == ">" { URLString = String(URLString.dropLast()) }
         guard let URL = URL(string: URLString) else { return nil }
         return URL

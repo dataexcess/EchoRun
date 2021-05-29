@@ -14,8 +14,6 @@ import Regex
 let kGoogleImageSearchURL = "https://www.google.com/searchbyimage/upload"
 //let kRegexVisuallySimilarLink_1 = "href=((?:(?!href).)*?)>Images for" //changed from 'Visually Similar' to 'Images for' on 06-10-2020
 let kRegexVisuallySimilarLink   = "href=((?:(?!href).)*?)>Visually similar"
-
-
 //let kRegexVisuallySimilarLink_2 = "^(.*?)>" //unfortunately I don't know how to chain together these 2 regex rules T_T
 let kRegexVisuallySimilarImageURLs = "(http[^\\s]+(jpg|jpeg|png|tiff)\\b)"
 let kMultipartFormDataNameKey = "encoded_image"
@@ -94,15 +92,18 @@ final class NetworkManager: NSObject {
     }
     
     func getVisuallySimilarButtonLinkURL(inResponse response:String) -> URL? {
-        guard var regexResult = kRegexVisuallySimilarLink.r?.findFirst(in: response)?.group(at: 1) else { return nil }
-        guard var URLString = (kBaseURL + regexResult.convertSpecialCharacters()).components(separatedBy: " ").first else { return nil }
+        var regexResult = try! Regex(kRegexVisuallySimilarLink).firstMatch(in: response)?.value
+        let regexResult2 = regexResult!.convertSpecialCharacters()
+        let index = regexResult2.index(regexResult2.startIndex, offsetBy: 5)
+        let finalString = regexResult2[index...]
+        guard var URLString = (kBaseURL + finalString).components(separatedBy: " ").first else { return nil }
         URLString = String(URLString.dropLast(5))
         guard let URL = URL(string: URLString) else { return nil }
         return URL
     }
     
     func getVisuallySimilarImageURLs(inResponse response:String) -> [URL]? {
-        let matched = matches(for: kRegexVisuallySimilarImageURLs, in: response)
+        let matched = try! Regex(kRegexVisuallySimilarImageURLs).allMatches(in: response).map(\.value)
         let filtered = matched.filter({ (match:String) -> Bool in !match.contains("google") }).filter({ (match:String) -> Bool in !match.contains("gstatic") })
         let URLs = filtered.map{ URL(string: $0)}.compactMap{ $0 }
         guard URLs.count > 0 else { return nil }

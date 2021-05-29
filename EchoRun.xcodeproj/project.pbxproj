@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2C81286565DB22D687938F3B /* Pods_EchoRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */; };
+		D1DA97A2266232E500796D82 /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = D1DA97A1266232E500796D82 /* Regex */; };
 		DA0F6D0F230ADB50003BC924 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F6D0E230ADB50003BC924 /* Extensions.swift */; };
 		DA423E2E2417C3A8007BDEC2 /* bayer.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA423E2D2417C387007BDEC2 /* bayer.ttf */; };
 		DA44B1172365F64C00FEDB44 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA44B1152365F60B00FEDB44 /* Roboto-Bold.ttf */; };
@@ -42,6 +43,10 @@
 		5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EchoRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD845438E4A47430D1ECF0 /* Pods-EchoRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EchoRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-EchoRun/Pods-EchoRun.release.xcconfig"; sourceTree = "<group>"; };
 		CC838A5B8E9C0EEC0577CF4B /* Pods-innate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-innate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-innate/Pods-innate.debug.xcconfig"; sourceTree = "<group>"; };
+		D1DA979826622DD600796D82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D1DA979A26622DDF00796D82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D1DA979C26622DEE00796D82 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		D1DA979E26622DF700796D82 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DA0F6D0E230ADB50003BC924 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DA423E2D2417C387007BDEC2 /* bayer.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bayer.ttf; sourceTree = "<group>"; };
 		DA44B1142365F60A00FEDB44 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DA97A2266232E500796D82 /* Regex in Frameworks */,
 				2C81286565DB22D687938F3B /* Pods_EchoRun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +97,10 @@
 		4B82459338905610FD68072A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1DA979E26622DF700796D82 /* libz.tbd */,
+				D1DA979C26622DEE00796D82 /* libc++.tbd */,
+				D1DA979A26622DDF00796D82 /* SystemConfiguration.framework */,
+				D1DA979826622DD600796D82 /* Security.framework */,
 				5D2B2D4CDAA8ED0EE43AF53D /* Pods_EchoRun.framework */,
 			);
 			name = Frameworks;
@@ -228,6 +238,9 @@
 			dependencies = (
 			);
 			name = EchoRun;
+			packageProductDependencies = (
+				D1DA97A1266232E500796D82 /* Regex */,
+			);
 			productName = innate;
 			productReference = DA462BAA2306C149005212BE /* Echo Run.app */;
 			productType = "com.apple.product-type.application";
@@ -256,6 +269,9 @@
 				Base,
 			);
 			mainGroup = DA462BA12306C149005212BE;
+			packageReferences = (
+				D1DA97A0266232E500796D82 /* XCRemoteSwiftPackageReference "Regex" */,
+			);
 			productRefGroup = DA462BAB2306C149005212BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -516,7 +532,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = EchoRun/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -524,7 +540,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataexcess.innate;
 				PRODUCT_NAME = "Echo Run";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -540,7 +556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 46T89JUTZ3;
 				INFOPLIST_FILE = EchoRun/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -548,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataexcess.innate;
 				PRODUCT_NAME = "Echo Run";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -579,6 +595,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D1DA97A0266232E500796D82 /* XCRemoteSwiftPackageReference "Regex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Regex";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D1DA97A1266232E500796D82 /* Regex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1DA97A0266232E500796D82 /* XCRemoteSwiftPackageReference "Regex" */;
+			productName = Regex;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA462BA22306C149005212BE /* Project object */;
 }

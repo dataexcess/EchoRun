@@ -9,7 +9,9 @@ target 'EchoRun' do
   pod 'Firebase/Crashlytics'
   pod 'Alamofire', '~> 4.9.1'
   pod 'AlamofireImage'
-  pod 'CrossroadRegex'
+#  pod 'CrossroadRegex'
+#  pod 'Regex'
+
   pod 'ScrollingPageControl'
   pod 'Siren'
   pod 'SwiftyUserDefaults'

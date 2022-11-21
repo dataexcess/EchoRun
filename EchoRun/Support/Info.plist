@@ -28,7 +28,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>We need camera permission to be able to take photos</string>
+	<string>We need camera permission so the user can take photos and use it to search for results</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need to access the library so the user can save a photo coming from the results</string>
 	<key>NSPhotoLibraryUsageDescription</key>

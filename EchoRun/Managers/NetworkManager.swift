@@ -15,7 +15,7 @@ let kGoogleImageSearchURL = "https://www.google.com/searchbyimage/upload"
 //let kRegexVisuallySimilarLink_1 = "href=((?:(?!href).)*?)>Images for" //changed from 'Visually Similar' to 'Images for' on 06-10-2020
 let kRegexVisuallySimilarLink   = "href=((?:(?!href).)*?)>Visually similar"
 //let kRegexVisuallySimilarLink_2 = "^(.*?)>" //unfortunately I don't know how to chain together these 2 regex rules T_T
-let kRegexVisuallySimilarImageURLs = "(http[^\\s]+(jpg|jpeg|png|tiff)\\b)"
+let kRegexVisuallySimilarImageURLs = "(http[^\\\\]*?(jpg|jpeg|png|tiff))" // "(http[^\\s]*?(jpg|jpeg|png|tiff))?"
 let kMultipartFormDataNameKey = "encoded_image"
 let kMultipartFormDataFileNameKey = "image.jpg"
 let kMultipartFormDataMimeTypeKey = "image/jpg"
@@ -93,7 +93,7 @@ final class NetworkManager: NSObject {
     
     func getVisuallySimilarButtonLinkURL(inResponse response:String) -> URL? {
         var regexResult = try! Regex(kRegexVisuallySimilarLink).firstMatch(in: response)?.value
-        let regexResult2 = regexResult!.convertSpecialCharacters()
+        guard let regexResult2 = regexResult?.convertSpecialCharacters() else { return URL(string: "nope") }
         let index = regexResult2.index(regexResult2.startIndex, offsetBy: 5)
         let finalString = regexResult2[index...]
         guard var URLString = (kBaseURL + finalString).components(separatedBy: " ").first else { return nil }
